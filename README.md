@@ -6,6 +6,7 @@ Projects for labs of Robot Controllers, realized on 6th semester.
 
 ### Projects list and description:
 1. **Blink** - sr_lab01:
+    - Digital IO, external interrupts
     - If defined BLINK, LD2 is blinking, else it is toggled
       by pressing B1 or pulling D2 pin (PA10) to ground.
       There is software debouncing on pin D2,
