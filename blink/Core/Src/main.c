@@ -3,7 +3,10 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : If defined BLINK, LD2 is blinking, else it is toggled
-  * 				  by pressing B1
+  * 				  by pressing B1 or pulling D2 pin (PA10) to ground.
+  * 				  There is software debouncing on pin D2, but not where B1
+  * 				  is connected, because there is hardware debouncing
+  * 				  (RC circuit) on the NUCLEO board.
   ******************************************************************************
   * @attention
   *
@@ -165,8 +168,18 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 #ifndef BLINK
-	if(GPIO_Pin == B1_Pin){
+	if(GPIO_Pin == B1_Pin){ // onboard button pressed
 		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	}
+	if(GPIO_Pin == B2_Pin){ // external button on D2 (PA10) pressed
+		static unsigned long lastInterruptTimeButton = 0;
+		unsigned long interruptTime = HAL_GetTick();
+
+		if(interruptTime - lastInterruptTimeButton > 300)
+			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+
+		lastInterruptTimeButton = interruptTime;
+
 	}
 #endif
 }
