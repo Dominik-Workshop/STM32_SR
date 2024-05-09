@@ -2,11 +2,11 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : If defined BLINK, LD2 is blinking, else it is toggled
+  * @brief          : If defined BLINK (line 41), LD2 is blinking, else it is toggled
   * 				  by pressing B1 or pulling D2 pin (PA10) to ground.
-  * 				  There is software debouncing on pin D2, but not where B1
-  * 				  is connected, because there is hardware debouncing
-  * 				  (RC circuit) on the NUCLEO board.
+  * 				  There is software debouncing on pin D2, and for B1, though
+  * 				  the onboard button has hardware debouncing (RC circuit)
+  * 				  on the NUCLEO board, so sofware debouncing may be redundant there.
   ******************************************************************************
   * @attention
   *
@@ -169,17 +169,22 @@ void SystemClock_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 #ifndef BLINK
 	if(GPIO_Pin == B1_Pin){ // onboard button pressed
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		static unsigned long lastInterruptTimeButton1 = 0;
+		unsigned long interruptTime1 = HAL_GetTick();
+
+		if(interruptTime1 - lastInterruptTimeButton1 > 300){
+			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+			lastInterruptTimeButton1 = interruptTime1;
+		}
 	}
 	if(GPIO_Pin == B2_Pin){ // external button on D2 (PA10) pressed
-		static unsigned long lastInterruptTimeButton = 0;
-		unsigned long interruptTime = HAL_GetTick();
+		static unsigned long lastInterruptTimeButton2 = 0;
+		unsigned long interruptTime2 = HAL_GetTick();
 
-		if(interruptTime - lastInterruptTimeButton > 300)
+		if(interruptTime2 - lastInterruptTimeButton2 > 300){
 			HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-
-		lastInterruptTimeButton = interruptTime;
-
+			lastInterruptTimeButton2 = interruptTime2;
+		}
 	}
 #endif
 }
