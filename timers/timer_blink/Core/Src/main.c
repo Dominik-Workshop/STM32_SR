@@ -2,8 +2,14 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Blinks the LD2 LED with frequency of 1Hz
+  * @brief          : Toggles the LD2 LED on/off each 1 second
   * 				  using timer interrupts
+  ******************************************************************************
+  * CALCULATIONS
+  * Update_event = TIM_CLK/((PSC+1)*(ARR+1)*(RCR+1)) [Hz]
+  *
+  * PSC = 7999, ARR = 9999
+  * 80 000 000 / ((7 999 + 1)*(9 999 + 1)) = 1Hz
   ******************************************************************************
   * @attention
   *
@@ -15,12 +21,6 @@
   * License. You may obtain a copy of the License at:
   *                        opensource.org/licenses/BSD-3-Clause
   *
-  ******************************************************************************
-  * CALCULATIONS
-  * Update_event = TIM_CLK/((PSC+1)*(ARR+1)*(RCR+1))
-  *
-  * PSC = 7999, ARR = 9999
-  * 80 000 000 / ((7 999 + 1)*(9 999 + 1)) = 1s
   ******************************************************************************
   */
 /* USER CODE END Header */

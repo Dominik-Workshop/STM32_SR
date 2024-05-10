@@ -2,7 +2,17 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : Generates a 6kHz PWM signal on pin with LD2 LED with
+  * 				  duty cycles cycled with B2 button presses (0%, 12.5%, 66%, 100%)
+  ******************************************************************************
+  * CALCULATIONS
+  * PWM_FREQUENCY = TIM_CLK/((PSC+1) [Hz]
+  * PWM_FREQUENCY = 80 000 000 / (19 + 1) = 6000 Hz
+  *
+  * PWM_DUTY_CYCLE = CCR/(ARR) * 100%
+  *  *CCR - Capture Compare Register
+  * PWM_DUTY_12_5 = 417 / 3332 * 100% = 12,51%
+  * PWM_DUTY_66 = 2199 / 3332 * 100% = 65.98%
   ******************************************************************************
   * @attention
   *
@@ -56,7 +66,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int pwm_duty;
+int pwm_duty_array[4] = {0, 417, 2199, 3332};
 volatile int flag;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
@@ -103,14 +113,16 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   flag = 0;
-  pwm_duty = 0;
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm_duty);
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm_duty_array[0]);
   HAL_TIM_PWM_Start(&htim2 , TIM_CHANNEL_1) ;
+  int i = 0;
   while (1)
   {
 	  if (flag == 1) {
-		  pwm_duty = (pwm_duty + 1000) % 10000;
-		  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm_duty);
+		  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm_duty_array[i]);
+		  i++;
+		  if(i == 4)
+			  i=0;
 		  flag = 0;
 	  }
 	  HAL_Delay(10);

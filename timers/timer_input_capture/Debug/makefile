@@ -47,7 +47,7 @@ all: timer_input_capture.elf secondary-outputs
 
 # Tool invocations
 timer_input_capture.elf: $(OBJS) $(USER_OBJS) E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timers\timer_input_capture\STM32L476RGTX_FLASH.ld
-	arm-none-eabi-gcc -o "timer_input_capture.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timers\timer_input_capture\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="timer_input_capture.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "timer_input_capture.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timers\timer_input_capture\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="timer_input_capture.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

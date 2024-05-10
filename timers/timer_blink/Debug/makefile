@@ -46,8 +46,8 @@ timer_blink.bin \
 all: timer_blink.elf secondary-outputs
 
 # Tool invocations
-timer_blink.elf: $(OBJS) $(USER_OBJS) E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timer_blink\STM32L476RGTX_FLASH.ld
-	arm-none-eabi-gcc -o "timer_blink.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timer_blink\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="timer_blink.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+timer_blink.elf: $(OBJS) $(USER_OBJS) E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timers\timer_blink\STM32L476RGTX_FLASH.ld
+	arm-none-eabi-gcc -o "timer_blink.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\timers\timer_blink\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="timer_blink.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

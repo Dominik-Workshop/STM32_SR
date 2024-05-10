@@ -2,7 +2,10 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : !!!!!!! Connect pins PC13 and PA0 !!!!!!
+  * 				  Prints on serial port time between B2 button presses.
+  * 				  It uses timer 5 which is being incremented every 250ns
+  * 				  (TIM_CLK/((PSC+1) [s] = 80MHz/(19+1)).
   ******************************************************************************
   * @attention
   *
@@ -59,6 +62,9 @@ void SystemClock_Config(void);
 volatile int flag;
 volatile int period;
 
+/**
+ * @brief function for printing using UART
+ */
 int _write(int file, char *ptr, int len) {
     HAL_UART_Transmit(&huart2, (uint8_t *)ptr, len, 50);
     return len;
@@ -118,7 +124,7 @@ int main(void)
   {
 	  if (flag == 1) {
 		  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		  printf("Wykryto zbocze po %d sekundach\r\n", period / 10000);
+		  printf("Edge detected after %.8f seconds\r\n", (float) period * 250 /1000000000);
 		  flag = 0;
 	  }
 

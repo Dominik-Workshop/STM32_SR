@@ -58,8 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define TIM5_PRESCALER 7999
-#define TIM5_PERIOD 9999999
+#define TIM5_PRESCALER 19
+#define TIM5_PERIOD 4294967295
 #define B1_Pin GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
 #define USART_TX_Pin GPIO_PIN_2
