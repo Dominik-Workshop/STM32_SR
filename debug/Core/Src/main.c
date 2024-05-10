@@ -2,7 +2,13 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : This program gives opportunity to play around with the debugger.
+  * 				  There are two global variables: msb and lsb.
+  * 				  Function foo() is called every second, and it each time it
+  * 				  increments the lsb, and every 5 times it increments the msb.
+  * 				  Additionally each second the LD2 (onboard LED) is toggled
+  * 				  on/off, and a depending if SWV is defined (line 43), it prints
+  * 				  a message on serial port, or using SWV (Serial Wire Viewer).
   ******************************************************************************
   * @attention
   *
@@ -24,7 +30,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,6 +40,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define SWV
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -63,6 +70,32 @@ void foo(void){
 		++msb;
 	}
 }
+
+#ifdef SWV
+
+/**
+ * @brief function for printing using SWV
+ */
+int _write(int file, char *ptr, int len) {
+    int i;
+    for (i = 0; i < len; i++) {
+        ITM_SendChar(*ptr++);
+    }
+    return len;
+}
+
+#else
+
+/**
+ * @brief function for printing using UART
+ */
+int _write(int file, char* ptr, int len){
+	HAL_UART_Transmit(&huart2, (uint8_t *)ptr, len, HAL_MAX_DELAY);
+	return len;
+}
+
+#endif
+
 
 /* USER CODE END 0 */
 
@@ -103,6 +136,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	 printf("Hello world!\n\r");
 	 HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 	 HAL_Delay(1000);
 	 foo();
