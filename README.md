@@ -7,7 +7,7 @@ These projects are designed for the Robot Controllers lab, implemented during th
 
 ## Project structure
 Each lab project has a corresponding folder. In it, alongside the project files,
-there is a README providing more details. **(to be added soon!)**
+there is a README providing more details.
 
 ### Projects list and description:
 1. **Blink** - `sr_lab01`:
