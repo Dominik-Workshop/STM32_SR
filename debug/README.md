@@ -1,3 +1,4 @@
+## printf()
 If defined SWV (line 43), 
 `#define SWV`,
 the nucleo board prints "Hello world!" via SWV:
@@ -9,6 +10,11 @@ Else,
 `//#define SWV`,
 the message is printed via UART, and it can be observed with a Serial Port monitor.
 
-### Helpful notes
+## Debuger
+https://github.com/Dominik-Workshop/STM32_SR/assets/100617381/c5550bcd-ac92-4665-a584-f9b0bb222257
+
+
+
+## Helpful notes
 If you don't see the `SWV ITM Data Donsole`, you can enable it here: 
 ![stm_SWV](https://github.com/Dominik-Workshop/STM32_SR/assets/100617381/c263a479-5910-48e8-bbb2-8b4086e3e014)
