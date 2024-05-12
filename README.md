@@ -1,6 +1,7 @@
 # STM32 basic projects
 
-These projects are designed for the Robot Controllers lab, implemented during the 6th semester.
+These projects are designed for the Robot Controllers lab, implemented during the 6th semester.\
+https://edu.domski.pl/kursy/sterowniki-robotow/sr-laboratorium/
 
 ![Microcontroller](https://img.shields.io/badge/Board-NUCLEO_L476RG-white) 
 ![Platform](https://img.shields.io/badge/Platform-STM32cubeIDE_1.4.0-darkcyan)
