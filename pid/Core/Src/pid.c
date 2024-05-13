@@ -38,9 +38,9 @@ int32_t pid_calc(cpid_t * pid, int32_t mv, int32_t dv) {
 	pid->mv = mv;
 	pid->dv = dv;
 	//UZUPELNIJ WYLICZANIE BLEDU
-	e = ...;
+	e = dv - mv;
 	//UZUPELNIJ WYLICZANIE SYGNALU PRZEZ CZLON PROPORCJONALNY
-	p = ...;
+	p = pid->p * e;
 	if (p > pid->p_max)
 		p = pid->p_max;
 	else if (p < pid->p_min)
@@ -50,7 +50,7 @@ int32_t pid_calc(cpid_t * pid, int32_t mv, int32_t dv) {
 	i = pid->sum;
 	//UZUPELNIJ WYLICZANIE SYGNALU PRZEZ CZLON CALKUJACY
 	//PAMIETAJ O SKALOWANIU CZASU WYKONYWANIA PETLI DO SEKUND
-	i += ...;
+	i += pid->i * e;
 	if (i > pid->i_max)
 		i = pid->i_max;
 	else if (i < pid->i_min)
@@ -59,7 +59,7 @@ int32_t pid_calc(cpid_t * pid, int32_t mv, int32_t dv) {
 	pid->i_val = i >> pid->f;
 	//UZUPELNIJ WYLICZANIE SYGNALU PRZEZ CZLON ROZNICZKUJACEGO
 	//PAMIETAJ O SKALOWANIU CZASU WYKONYWANIA PETLI DO SEKUND
-	d = ...;
+	d = pid->d * (e - pid->e_last) * 1000/pid->dt_ms;
 	if (d > pid->d_max)
 		d = pid->d_max;
 	else if (d < pid->d_min)
