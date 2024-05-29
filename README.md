@@ -54,4 +54,4 @@ there is a README providing more details.
         `HAL_ADC_PollForConversion()` is used to get ADC values.
 
 5. **PID** - `sr_lab4b`:
-    - To be continued...
+    - Implementation of PID controller

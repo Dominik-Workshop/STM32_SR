@@ -2,7 +2,13 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : !!! Connect an RC low pass filter: !!!
+  * 				  PA4 (Input) ---- R ----+---- PB0 (Output)
+  *											 |
+  *											 C
+  *											 |
+  *											GND
+  *					  Implementation of PID controller
   ******************************************************************************
   * CALCULATIONS
   * Update_event = TIM_CLK/((PSC+1)*(ARR+1)*(RCR+1)) [Hz]
@@ -148,7 +154,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim7);
   HAL_ADC_Start_IT(&hadc1);
   //DOBIERZ ODPOWIEDNIE WSPOLCZYNNIKI REGULATORA PID
-  pid_init(&pid, 1.0f, 0.0f, 0.0f, 10, 1);
+  pid_init(&pid, 10.0f, 0.20f, 0.0f, 10, 1);
 
   pid.p_max = pid_scale(&pid, 4095);
   pid.p_min = pid_scale(&pid, -4095);
