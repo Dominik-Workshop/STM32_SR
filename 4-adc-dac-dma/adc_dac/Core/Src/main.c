@@ -2,7 +2,20 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : !!!!!!! Connect pins PA4 and PB0 !!!!!!
+  * 				  Using DAC desired voltages are produced on pin PA4,
+  * 				  and ADC measures these voltage using pin PB0.
+  * 				  These values are printed with UART, e.g:
+  * 				  Set value: 0.00
+  * 				  Measured value: 0.00
+  * 				  Set value: 0.49
+  * 				  Measured value: 0.44
+  * 			      Set value: 1.70
+  * 				  Measured value: 1.64
+  * 				  Set value: 2.50
+  * 				  Measured value: 2.44
+  * 				  Set value: 3.30
+  * 				  Measured value: 3.22
   ******************************************************************************
   * @attention
   *
@@ -147,14 +160,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
 	if (adc_flag == 1){
-		//printf("Set value: %d\r\n", dac_value);
-		//printf("Measured value: %d\r\n", adc_value);
 		printf("Set value: %.2f\r\n", conv_DAC_to_voltage(dac_value));
 		printf("Measured value: %.2f\r\n", conv_ADC_to_voltage(adc_value));
 		adc_flag = 0;
 		dac_value = conv_voltage_to_DAC(dac_voltages[dac_index]);
-//		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, dac_value);
-
 		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, dac_value);
 		++dac_index;
 		if(dac_index > 4 )

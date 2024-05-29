@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  17 .debug_line   0000cf91  00000000  00000000  0005fbd0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000ff13f  00000000  00000000  0006cb61  2**0
+ 18 .debug_str    000ff14d  00000000  00000000  0006cb61  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  0016bca0  2**0
+ 19 .comment      0000007b  00000000  00000000  0016bcae  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000048fc  00000000  00000000  0016bd1c  2**2
+ 20 .debug_frame  000048fc  00000000  00000000  0016bd2c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1809,8 +1809,6 @@ int main(void)
  8001378:	781b      	ldrb	r3, [r3, #0]
  800137a:	2b01      	cmp	r3, #1
  800137c:	d142      	bne.n	8001404 <main+0xc4>
-		//printf("Set value: %d\r\n", dac_value);
-		//printf("Measured value: %d\r\n", adc_value);
 		printf("Set value: %.2f\r\n", conv_DAC_to_voltage(dac_value));
  800137e:	4b27      	ldr	r3, [pc, #156]	; (800141c <main+0xdc>)
  8001380:	881b      	ldrh	r3, [r3, #0]
@@ -1849,8 +1847,6 @@ int main(void)
  80013d0:	b29a      	uxth	r2, r3
  80013d2:	4b12      	ldr	r3, [pc, #72]	; (800141c <main+0xdc>)
  80013d4:	801a      	strh	r2, [r3, #0]
-//		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, dac_value);
-
 		HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, dac_value);
  80013d6:	4b11      	ldr	r3, [pc, #68]	; (800141c <main+0xdc>)
  80013d8:	881b      	ldrh	r3, [r3, #0]

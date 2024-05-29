@@ -2,7 +2,11 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : Prints measured voltage on pin PB0 via UART:
+  * 				  Measured value: <adc_raw>, <voltage> [V]
+  *					  e.g:
+  * 				  Measured value: 4031, 3.25 [V]
+  * 				  Measured value: 0, 0.00 [V]
   ******************************************************************************
   * @attention
   *
@@ -121,13 +125,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
 	if (adc_flag == 1){
-		printf("Measured value: %d\r\n", adc_value);
-		printf("Measured value: %.2f\r\n", conv_ADC_to_voltage(adc_value));
+		printf("Measured value: %d, %.2f [V]\r\n", adc_value, conv_ADC_to_voltage(adc_value));
 		adc_flag = 0;
 
 		HAL_ADC_Start_IT(&hadc1);
 	}
-	HAL_Delay(1000);
+	HAL_Delay(200);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
