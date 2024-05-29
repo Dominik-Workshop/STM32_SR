@@ -46,8 +46,8 @@ dma.bin \
 all: dma.elf secondary-outputs
 
 # Tool invocations
-dma.elf: $(OBJS) $(USER_OBJS) E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\dma\STM32L476RGTX_FLASH.ld
-	arm-none-eabi-gcc -o "dma.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\dma\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dma.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+dma.elf: $(OBJS) $(USER_OBJS) E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\4-adc-dac-dma\dma\STM32L476RGTX_FLASH.ld
+	arm-none-eabi-gcc -o "dma.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\PWR\Semestr6\Sterowniki_robotow\STM32_SR\4-adc-dac-dma\dma\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dma.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

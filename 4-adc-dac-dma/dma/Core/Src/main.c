@@ -2,7 +2,10 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : !!!!!!! Connect pins PA4 and PB0 !!!!!!
+  * 				  Using DAC desired voltages are produced on pin PA4,
+  * 				  and ADC measures these voltage using pin PB0.
+  * 				  DMA is used to set the DAC output.
   ******************************************************************************
   * @attention
   *
@@ -112,8 +115,8 @@ int main(void)
   MX_DAC1_Init();
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-//  HAL_ADC_Start_IT(&hadc1);
-  HAL_ADC_Start(&hadc1); // You have to start ADC
+  //HAL_ADC_Start_IT(&hadc1);
+  HAL_ADC_Start(&hadc1);
 
   HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0);
   HAL_DAC_Start_DMA(&hdac1, DAC_CHANNEL_1, &dac[0], 16, DAC_ALIGN_8B_R);
@@ -124,8 +127,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1){
 	  if(HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK){
-		adc_value = HAL_ADC_GetValue(&hadc1); // Get
-		//ADC_SetActiveChannel(&hadc1, ADC_CHANNEL_7);
+		adc_value = HAL_ADC_GetValue(&hadc1);
 		printf("Measured value: %d\r\n", adc_value);
 		HAL_ADC_Start(&hadc1);
 	  }
