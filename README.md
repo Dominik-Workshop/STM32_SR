@@ -39,7 +39,19 @@ there is a README providing more details.
         The duty cycle is cycled through different values by pressing the B1 button.
 
 4. **ADC, DAC, DMA** - `sr_lab4`:
-    - To be continued...
+    - ADC:
+      - Prints measured voltage on pin PB0 via UART.\
+        Uses interrupts to read ADC values.
+    - ADC_DAC:
+      - Using DAC desired voltages are produced on pin PA4,
+        and ADC measures these voltage using pin PB0.\
+        These values are printed with UART.\
+        Uses interrupts to read ADC values.
+    - DMA:
+      - Using DAC desired voltages are produced on pin PA4,
+        and ADC measures these voltage using pin PB0.\
+        DMA is used to set the DAC output.\
+        `HAL_ADC_PollForConversion()` is used to get ADC values.
 
 5. **PID** - `sr_lab4b`:
     - To be continued...
